@@ -3,11 +3,16 @@ import java.util.Arrays;
 public class QuickSort {
     public static void quickSort(int arr[], int low, int high) {
         int pivot;
+        if(low < high){
+            pivot = partition(arr, low, high);
+            System.out.println("Pivot element used for partition: " + arr[pivot]);
+
+            quickSort(arr, low, pivot - 1);
+            quickSort(arr, pivot + 1, high);
+        }
         // FILL IN CODE: add a base case
         // Add recursive calls
 
-        pivot = partition(arr, low, high);
-        System.out.println("Pivot element used for partition: " + arr[pivot]);
 
     }
 

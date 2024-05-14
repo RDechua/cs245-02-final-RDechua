@@ -48,12 +48,18 @@ public class Graph {
     public boolean dfs(int vertex, int target, boolean[] visited, LinkedList<Integer> path) {
         // FILL IN CODE: need  to add a base case, and  to mark vertex as visited
         // Currently, code has bug(s) and missing code
+        if(vertex == target){
+            return true;
+        }
         Edge curr = graph[vertex];
         while(curr != null) {
-           boolean res = dfs(curr.neighbor, target, visited, path);
            // FILL IN CODE to make it run recursive DFS to reach  target,
             // and add vertices on the path to target to the given LinkedList
-
+            if(!visited[curr.neighbor]){
+                visited[curr.neighbor] = true;
+                path.add(curr.neighbor);
+                return dfs(curr.neighbor, target, visited, path);
+            }
             curr = curr.next;
         }
         return false;
@@ -97,7 +103,7 @@ public class Graph {
 
         boolean[] visited = new boolean[8];
         LinkedList<Integer> path1 = new LinkedList<>();
-        g.dfs(0, 7, visited, path1); // compute vertices on the path from 0 to 7 using dfs
+        System.out.println(g.dfs(0, 7, visited, path1)); // compute vertices on the path from 0 to 7 using dfs
         path1.addFirst(0);
         System.out.println(path1); // adding the start vertex (0) manually
         // [0, 5, 6 ,7]   - this is the correct path from 0 to 7
